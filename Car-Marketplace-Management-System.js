@@ -100,26 +100,32 @@ const carMarket = require("./obj.js");
 
 // Update the price of a specific car in an agency
 
-// function updateCarPrice(agencyId, carNumber, newPrice) {
+// function updateCarPrice(agencyId, carNumber, newPrice,carBrand) {
 //     const agency = carMarket.sellers.find((seller) => seller.agencyId === agencyId);
-
 //     if (agency) {
-//       const carToUpdate = agency.cars.find((car) => car.carNumber === carNumber);
-
-//       if (carToUpdate) {
-//         carToUpdate.models.forEach((model) => {
-//           model.price = newPrice;
+//     const carModelInAgency = agency.cars.find((car)=>car.brand === carBrand );
+//       if (carModelInAgency) {
+//         carModelInAgency.models.forEach(car => {
+//             if(car.carNumber===carNumber){
+//                 car.price = newPrice;
+//                 console.log(`Price for car with car number ${carNumber} updated to ${car.price}.`);
+//             }
 //         });
-//         console.log(`Price for car with car number ${carNumber} updated to ${newPrice}.`);
+//       }
+//       else{
+//         console.log("There is no such car in the agency!");
 //       }
 //     }
 //   }
 
+//   const carBrand = 'bmw'
 //   const agencyIdToUpdate = "gNHjNFL12";
 //   const carNumberToUpdate = "EMW_7";
 //   const newCarPrice = 550000;
 
-//   updateCarPrice(agencyIdToUpdate, carNumberToUpdate, newCarPrice); לא הצלחתי
+//   updateCarPrice(agencyIdToUpdate, carNumberToUpdate, newCarPrice, carBrand);
+
+//   console.log(carMarket.sellers[2].cars)
 
 //   --------------------------------------------------------------------------------------------------
 
@@ -152,29 +158,34 @@ const carMarket = require("./obj.js");
 
 // Transfer a car from one agency to another
 
-// function transferCarBetweenAgencies(sourceAgencyId, targetAgencyId, carNumber) {
-//     const sourceAgency = carMarket.sellers.find((seller) => seller.agencyId === sourceAgencyId);
-//     const targetAgency = carMarket.sellers.find((seller) => seller.agencyId === targetAgencyId);
+// function transferCarBetweenAgencies(oldAgency, newAgency, carNumber) {
+//   const oldSeller = carMarket.sellers.find(
+//     (seller) => seller.agencyName === oldAgency
+//   );
+//   console.log(oldSeller);
+//   const newSeller = carMarket.sellers.find(
+//     (seller) => seller.agencyName === newAgency
+//   );
+//   console.log(newSeller);
+//   const carIndex = oldSeller.cars.findIndex((car) =>
+//     car.models.findIndex((model) => model.carNumber === carNumber)
+//   );
+//   console.log(" ");
+//   console.log("the car index is " + carIndex);
+//   console.log(" ");
 
-//     if (sourceAgency && targetAgency) {
-//       const carIndexToTransfer = sourceAgency.cars.findIndex((car) => car.carNumber === carNumber);
-
-//       if (carIndexToTransfer !== -1) {
-//         const transferredCar = sourceAgency.cars.splice(carIndexToTransfer, 1)[0];
-//         targetAgency.cars.push(transferredCar);
-
-//         console.log(`Car with car number ${carNumber} transferred from ${sourceAgency.agencyName} to ${targetAgency.agencyName}.`);
-//       }
-//     } else {
-//       console.log(`Source or target agency not found.`);
-//     }
+//   if (carIndex !== -1) {
+//     const removedCar = oldSeller.cars[carIndex];
+//     oldSeller.cars.splice(carIndex, 1);
+//     console.log(`Successfully removed the ${removedCar.brand} from inventory.`);
+//   } else {
+//     console.log(
+//       `Car with carNumber ${carNumber} not found in ${oldSeller.agencyName}'s inventory.`
+//     );
 //   }
+// }
 
-//   const sourceAgencyIdToTransferFrom = "Plyq5M5AZ";
-//   const targetAgencyIdToTransferTo = "26_IPfHU1";
-//   const carNumberToTransfer = "AZJZ4";
-
-//   transferCarBetweenAgencies(sourceAgencyIdToTransferFrom, targetAgencyIdToTransferTo, carNumberToTransfer); לא הצלחתי
+// transferCarBetweenAgencies("Best Deal", "CarMax", "7A5b-");
 
 //   -------------------------------------------------------------------------------------------
 
